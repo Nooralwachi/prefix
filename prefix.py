@@ -1,13 +1,19 @@
 from collections import defaultdict
+
 def find_prefix(filename):
     pre = ''
-    with open(filename, 'r') as file:
-        pre = file.readline()
-        for line in file:
+    with open(filename, 'r') as fileStream:
+        lines=readPrefixFromFileStream(fileStream)
+        print(lines)
+        pre = lines[0]
+        for line in lines[1:]:
             word = line.strip()
             pre = compare(pre, word)
     return pre
-    
+
+def readPrefixFromFileStream(fileStream):
+    return fileStream.readlines()
+ 
 def compare(left, right):
     if (len(left) > len(right)):    
         left, right = right, left
@@ -60,4 +66,6 @@ words = ['ax', 'apple', 'book', 'banana']
 print(find_common_prefix2(words))
 words = ['app', 'apple', 'book', 'banana', 'cook', 'coat','common','compare', 'coated']
 print(find_common_prefix2(words))
+
+
 
